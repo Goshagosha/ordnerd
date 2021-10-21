@@ -1,6 +1,6 @@
 # student_notekeeper
 
-Me an my adhd have gotten very frustrated that even within one faculty, different professors use different services for teaching, between moodle, mamph, personal website and youtube channels, and I spend first two months every semester organizing bookmarks in my browser toolbar. So I have written this app to keep all links to various resources of each lecture in one place.
+Me and my adhd have gotten very frustrated that even within one faculty different professors use different services for teaching: between moodle, mamph, personal websites and youtube channels I spend first two months every semester organizing bookmarks in my browser toolbar. So I have written this app to keep all links to various resources of each lecture/seminar/whathaveyou in one place.
 
 ## Getting Started
 
