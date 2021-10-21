@@ -15,3 +15,8 @@ First of all you want [flutter](https://flutter.dev)
 ### Android
 `flutter build apk --split-per-abi`  
 `flutter install`
+  
+## Screenshots
+<img src="https://user-images.githubusercontent.com/33848913/138367775-8aaf6a31-8f37-40e9-9fd2-7ce084fa3afa.png" width="200"/> <img src="https://user-images.githubusercontent.com/33848913/138367779-a09e06f8-17af-4136-8b6f-a6f9cd0ca888.png" width="200"/>
+<img src="https://user-images.githubusercontent.com/33848913/138367781-cb41a8fe-2a28-463b-bcc4-51af6d702595.png" width="200"/>
+<img src="https://user-images.githubusercontent.com/33848913/138367784-e3031601-2223-4197-8c2d-9c516774b8cc.png" width="200"/>
