@@ -7,4 +7,11 @@ Me an my adhd have gotten very frustrated that even within one faculty, differen
 There is only APK in releases, it requires no permissions, has no access to the internet, and, well, is opensource.  
 PRs with improvements are welcome, as are issues and suggestions.  
   
-Coded in anger, refactoring may be required :)
+Coded in anger, refactoring may be required :)  
+  
+## Compilation
+First of all you want [flutter](https://flutter.dev)
+
+### Android
+`flutter build apk --split-per-abi`
+`flutter install`
