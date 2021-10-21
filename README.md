@@ -13,5 +13,5 @@ Coded in anger, refactoring may be required :)
 First of all you want [flutter](https://flutter.dev)
 
 ### Android
-`flutter build apk --split-per-abi`
+`flutter build apk --split-per-abi`  
 `flutter install`
