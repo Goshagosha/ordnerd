@@ -116,10 +116,30 @@ class _LectureRouteState extends State<LectureRoute> {
                                         )));
                             break;
                           case "delete":
-                            BlocProvider.of(context)!
-                                .bloc
-                                .deleteLecture(widget.id);
-                            Navigator.pop(context);
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text("Are you sure?"),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(false),
+                                          child: Text("Cancel")),
+                                      TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(context).pop(true),
+                                          child: Text("Delete"))
+                                    ],
+                                  );
+                                }).then((confirmed) {
+                              if (confirmed) {
+                                BlocProvider.of(context)!
+                                    .bloc
+                                    .deleteLecture(widget.id);
+                                Navigator.pop(context);
+                              }
+                            });
                             break;
                         }
                       },
