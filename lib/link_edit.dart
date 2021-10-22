@@ -45,9 +45,9 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                           super.dispose();
                         }
 
+                          URItype uritype = widget.link.uritype;
                         return StatefulBuilder(builder: (context, setState) {
                           String text = widget.link.link;
-                          URItype uritype = widget.link.uritype;
                           return SingleChildScrollView(
                             child: AlertDialog(
                               insetPadding: EdgeInsets.all(16.0),
