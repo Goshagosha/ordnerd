@@ -8,11 +8,15 @@ class Link {
   String name;
   String type;
   String link;
+  String extra;
   URItype uritype;
   int? dbId;
 
   Link(this.name, this.type,
-      {this.link = '', this.dbId, this.uritype = URItype.http});
+      {this.link = '',
+      this.dbId,
+      this.uritype = URItype.http,
+      this.extra = ''});
 
   Map<String, dynamic> toMap() {
     return {
@@ -20,7 +24,8 @@ class Link {
       'type': type,
       'link': link,
       'id': dbId,
-      'uritype': uritype.index
+      'uritype': uritype.index,
+      'extra': extra
     };
   }
 }

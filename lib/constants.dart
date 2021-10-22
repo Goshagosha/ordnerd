@@ -3,13 +3,6 @@ import 'package:flutter/material.dart';
 
 enum URItype { email, http }
 
-extension URItypeFromString on String {
-  URItype parseURItype() {
-    return URItype.values
-        .firstWhere((element) => element.toString() == 'URItype.' + this);
-  }
-}
-
 extension ProtocolFromURItype on URItype {
   String protocol() {
     switch (this) {
@@ -25,6 +18,7 @@ Set linkTypes = {
   "Homepage",
   "Homework",
   "Online Classroom",
+  "Online Tutorium",
   "Script",
   "Professor",
   "Tutor",

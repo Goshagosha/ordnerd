@@ -31,7 +31,11 @@ class DbProvider {
         (0, 'youtube channel','Online Classroom', 'youtube.com', 1),
         (0, 'discord group ChomskyFTW', 'Community', '', 1);
       ''');
-    }, version: 3);
+    }, onUpgrade: (db, versionOld, versionNew) {
+      if (versionOld <= 3) {
+        db.execute("ALTER TABLE link ADD COLUMN extra TEXT;");
+      }
+    }, version: 4);
   }
 
   Future<void> saveLecture(Lecture lecture) async {
@@ -87,7 +91,8 @@ class DbProvider {
         each['type']: Link(each['name'] ?? '', each['type'],
             link: each['link'],
             dbId: each['id'],
-            uritype: URItype.values[each['uritype']])
+            uritype: URItype.values[each['uritype']],
+            extra: each['extra'] ?? '')
     };
   }
 
@@ -112,7 +117,7 @@ class DbProvider {
     lm['lecture'] = lectureId;
 
     return await db.rawInsert(
-        "INSERT INTO link('lecture','name', 'type', 'link', 'uritype') VALUES ($lectureId, '${link.name}', '${link.type}', '${link.link}', ${link.uritype.index})");
+        "INSERT INTO link('lecture','name', 'type', 'link', 'uritype', 'extra') VALUES ($lectureId, '${link.name}', '${link.type}', '${link.link}', ${link.uritype.index}, ${link.extra})");
   }
 
   Future<void> _updateLink(Link link) async {
