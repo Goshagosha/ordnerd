@@ -147,6 +147,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                       context: context,
                       builder: (context) {
                         final TextEditingController tec = TextEditingController();
+                        tec.text = widget.link.extra;
                         tec.selection = TextSelection(
                             baseOffset: 0, extentOffset: tec.text.length);
 
