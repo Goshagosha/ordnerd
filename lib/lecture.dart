@@ -120,16 +120,16 @@ class _LectureRouteState extends State<LectureRoute> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text("Are you sure?"),
+                                    title: const Text("Are you sure?"),
                                     actions: [
                                       TextButton(
                                           onPressed: () =>
                                               Navigator.of(context).pop(false),
-                                          child: Text("Cancel")),
+                                          child: const Text("Cancel")),
                                       TextButton(
                                           onPressed: () =>
                                               Navigator.of(context).pop(true),
-                                          child: Text("Delete"))
+                                          child: const Text("Delete"))
                                     ],
                                   );
                                 }).then((confirmed) {
@@ -158,10 +158,8 @@ class _LectureRouteState extends State<LectureRoute> {
                         title: Text(widget.lecture.tutoriumAddress),
                         subtitle: const Text("tutorium address"),
                       ),
-                    const Divider(),
                     for (Link each in widget.lecture.links.values)
                       if (each.name.isNotEmpty) LinkWidget(link: each),
-                    const Divider(),
                     if (widget.lecture.customNotes.isNotEmpty)
                       Text(widget.lecture.customNotes)
                   ],
