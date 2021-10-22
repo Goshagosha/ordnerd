@@ -9,6 +9,10 @@ PRs with improvements are welcome, as are issues and suggestions.
   
 Coded in anger, refactoring may be required :)  
   
+## Installation
+
+Just grab an apk from [latest](https://github.com/Goshagosha/student_notekeeper/releases/latest) release
+
 ## Compilation
 First of all you want [flutter](https://flutter.dev)
 
