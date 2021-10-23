@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:student_notekeeper/lecture.dart';
-import 'package:student_notekeeper/lecture_bloc.dart';
-import 'package:student_notekeeper/link_edit.dart';
+import 'package:student_notekeeper/models/lecture.dart';
+import 'package:student_notekeeper/utils/bloc/lecture_bloc.dart';
+import 'package:student_notekeeper/widgets/link_edit.dart';
 
 class LectureNewRoute extends LectureEditRoute {
   LectureNewRoute({Key? key})

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:student_notekeeper/constants.dart';
-import 'package:student_notekeeper/link.dart';
+import 'package:student_notekeeper/models/helpers/uritype.dart';
+import 'package:student_notekeeper/routes/link.dart';
 import 'package:tuple/tuple.dart';
 
 class LinkEditorWidget extends StatefulWidget {
@@ -22,7 +22,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
             Expanded(
               child: TextFormField(
                 initialValue: widget.link.name,
-                decoration: InputDecoration(hintText: widget.link.type),
+                decoration: InputDecoration(hintText: widget.link.type.toStringCustom()),
                 onChanged: (text) => widget.link.name = text,
               ),
             ),
@@ -32,9 +32,9 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                       context: context,
                       builder: (context) {
                         final TextEditingController tec = TextEditingController(
-                            text: widget.link.link == ''
-                                ? widget.link.name
-                                : widget.link.link);
+                            text: widget.link.link ??
+                                widget.link.name
+                                );
                         tec.selection = TextSelection(
                             baseOffset: 0, extentOffset: tec.text.length);
 
@@ -46,12 +46,13 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                         }
 
                           URItype uritype = widget.link.uritype;
+                          /// This is a link editor dialog. It's wrapped in stateful builder so we can call SetState from it.
                         return StatefulBuilder(builder: (context, setState) {
-                          String text = widget.link.link;
+                          String text = widget.link.link.elseEmpty();
                           return SingleChildScrollView(
                             child: AlertDialog(
                               insetPadding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 16.0),
-                              title: Text(widget.link.type + " URI"),
+                              title: Text(widget.link.type.toStringCustom() + " URI"),
                               content: SizedBox(
                                 width: double.maxFinite,
                                 child: Row(
@@ -70,17 +71,12 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                                           });
                                         },
                                         value: uritype,
-                                        items: [
-                                          DropdownMenuItem(
+                                        items: <DropdownMenuItem<URItype>>[ 
+                                          for (URItype ut in URItype.values) DropdownMenuItem(
                                             child:
-                                                Text(URItype.http.protocol()),
-                                            value: URItype.http,
-                                          ),
-                                          DropdownMenuItem(
-                                            child:
-                                                Text(URItype.email.protocol()),
-                                            value: URItype.email,
-                                          ),
+                                                Text(ut.protocol()),
+                                            value: ut,
+                                          ) 
                                         ]),
                                     Expanded(
                                       flex: 3,
@@ -111,10 +107,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                                 IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        text = tec.text
-                                            .replaceAll("http://", '')
-                                            .replaceAll("https://", '')
-                                            .replaceAll("mailto:", '');
+                                        text = tec.text.stripProtocols();
                                       });
                                       Navigator.of(context)
                                           .pop(Tuple2(uritype, text));
@@ -129,7 +122,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                     setState(() {
                       widget.link.uritype = tuple.item1;
                       widget.link.link = tuple.item2;
-                        if (widget.link.name.isEmpty && widget.link.link.isNotEmpty) showDialog(context: context, builder: (context) => AlertDialog(content: const Text("This link won't save unless you give it a name!"), actions: [TextButton(onPressed: () {Navigator.of(context).pop();}, child: const Text("OK"))],));
+                        if (widget.link.name.isEmpty && widget.link.link!.isNotEmpty) showDialog(context: context, builder: (context) => AlertDialog(content: const Text("This link won't save unless you give it a name!"), actions: [TextButton(onPressed: () {Navigator.of(context).pop();}, child: const Text("OK"))],));
                     });
                   }
                 },
@@ -147,7 +140,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                       context: context,
                       builder: (context) {
                         final TextEditingController tec = TextEditingController();
-                        tec.text = widget.link.extra;
+                        tec.text = widget.link.extra.elseEmpty();
                         tec.selection = TextSelection(
                             baseOffset: 0, extentOffset: tec.text.length);
 
@@ -158,7 +151,6 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                           super.dispose();
                         }
 
-                        String text = widget.link.extra;
                         return StatefulBuilder(builder: (context, setState) {
                           return AlertDialog(
                               insetPadding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 16.0),
@@ -179,20 +171,15 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                               IconButton(
                                   onPressed: () async {
                                     Clipboard.getData(Clipboard.kTextPlain)
-                                        .then((data) {
-                                          if (data != null) {
-                                          setState(() async { tec.text = data.text!;})
-                                        }
-                                    });
+                                        .then((data) => 
+                                          setState(() async { tec.text = data?.text ?? tec.text})
+                                    );
                                   },
                                   icon: const Icon(Icons.paste)),
                               IconButton(
                                   onPressed: () {
-                                    setState(() {
-                                      text = tec.text;
-                                    });
                                     Navigator.of(context)
-                                        .pop(text);
+                                        .pop(tec.text);
                                   },
                                   icon: const Icon(Icons.done)),
                             ],
@@ -200,15 +187,13 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                         });
                       });
                     setState(() {
-                      if (result != null) {
-                        widget.link.extra = result;
-                        if (widget.link.name.isEmpty && result.isNotEmpty) showDialog(context: context, builder: (context) => AlertDialog(content: const Text("This note won't save unless you give it a name!"), actions: [TextButton(onPressed: () {Navigator.of(context).pop();}, child: const Text("OK"))],));
-                      }
+                        widget.link.extra = result.elseEmpty();
+                        if (widget.link.name.isEmpty && result.elseEmpty().isNotEmpty) showDialog(context: context, builder: (context) => AlertDialog(content: const Text("This note won't save unless you give it a name!"), actions: [TextButton(onPressed: () {Navigator.of(context).pop();}, child: const Text("OK"))],));
                     });
                   },
                 icon: Icon(
                   Icons.short_text,
-                  color: (widget.link.extra != "")
+                  color: (widget.link.extra != null)
                       ? Theme.of(context).primaryColor
                       : Theme.of(context).disabledColor,
                 ),

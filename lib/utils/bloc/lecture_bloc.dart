@@ -1,8 +1,7 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
-import 'package:student_notekeeper/db_controller.dart';
-import 'package:student_notekeeper/lecture.dart';
+import 'package:flutter/material.dart';
+import 'package:student_notekeeper/models/lecture.dart';
+import 'package:student_notekeeper/utils/services/db_controller.dart';
 
 class BlocProvider extends InheritedWidget {
   final LecturesBloc bloc;

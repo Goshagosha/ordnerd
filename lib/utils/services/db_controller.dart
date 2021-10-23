@@ -1,8 +1,8 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:student_notekeeper/constants.dart';
-import 'package:student_notekeeper/lecture.dart';
-import 'package:student_notekeeper/link.dart';
+import 'package:student_notekeeper/models/helpers/uritype.dart';
+import 'package:student_notekeeper/models/lecture.dart';
+import 'package:student_notekeeper/models/link.dart';
 
 class DbProvider {
   DbProvider._();

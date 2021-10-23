@@ -1,34 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:student_notekeeper/constants.dart';
+import 'package:student_notekeeper/models/helpers/linktype.dart';
+import 'package:student_notekeeper/models/helpers/uritype.dart';
+import 'package:student_notekeeper/models/link.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class Link {
-  String name;
-  String type;
-  String link;
-  String extra;
-  URItype uritype;
-  int? dbId;
-
-  Link(this.name, this.type,
-      {this.link = '',
-      this.dbId,
-      this.uritype = URItype.http,
-      this.extra = ''});
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'type': type,
-      'link': link,
-      'id': dbId,
-      'uritype': uritype.index,
-      'extra': extra
-    };
-  }
-}
 
 class LinkWidget extends StatefulWidget {
   final Link link;
@@ -45,35 +21,32 @@ class _LinkWidgetState extends State<LinkWidget> {
     return ExpansionTile(
       title: Text(widget.link.name),
       subtitle: Text(
-        widget.link.type,
+        widget.link.type.toStringCustom(),
         style: Theme.of(context).textTheme.caption,
       ),
       children: [
-        if (widget.link.link != '')
+        if (widget.link.link != null)
           ListTile(
               title: Text(
-                widget.link.link,
+                widget.link.link!,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               onTap: () {
-                canLaunch(widget.link.uritype.protocol() + widget.link.link)
-                    .then((value) {
-                  if (value) {
-                    launch(widget.link.uritype.protocol() + widget.link.link);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("The link can not be opened")));
-                  }
-                });
+                String fullLink =
+                    widget.link.uritype.protocol() + widget.link.link!;
+                canLaunch(fullLink).then((can) => can
+                    ? launch(fullLink)
+                    : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("The link can not be opened"))));
               },
               trailing: Icon(widget.link.uritype == URItype.http
                   ? Icons.link
                   : Icons.alternate_email)),
-        if (widget.link.extra != '')
+        if (widget.link.extra != null)
           InkWell(
             child: ListTile(
                 title: Text(
-                  widget.link.extra,
+                  widget.link.extra!,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 onTap: () {
