@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:logger/logger.dart';
+import 'package:student_notekeeper/models/helpers/linktype.dart';
 import 'package:student_notekeeper/models/link.dart';
 
 class Lecture {
@@ -7,7 +10,7 @@ class Lecture {
   String? tutoriumAddress;
   String? customNotes;
 
-  Map<int, Link> links = {};
+  Map<LinkType, Link> links = {};
 
   Lecture(
     this.name, {
@@ -16,6 +19,18 @@ class Lecture {
     this.tutoriumAddress,
     this.customNotes,
   });
+
+  static Lecture fromSnapshot(DocumentSnapshot m) {
+    Lecture l = Lecture(m['name'],
+        dbId: m['id'],
+        address: m['address'],
+        tutoriumAddress: m['tutoriumAddress'],
+        customNotes: m['customNotes']);
+    Logger().d(l);
+    l.links = Map.fromIterable((m['links'] as List),
+        key: (eachLink) => ((eachLink as Map)['type'] as int).toLinkType());
+    return l;
+  }
 
   Map<String, Object?> toMap() {
     return {

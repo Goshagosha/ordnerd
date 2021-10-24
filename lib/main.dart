@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:student_notekeeper/routes/authentication.dart';
 import 'package:student_notekeeper/routes/lecture_list.dart';
 import 'package:student_notekeeper/utils/bloc/lecture_bloc.dart';
 import 'package:student_notekeeper/utils/settings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
@@ -22,7 +27,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: heidelbergPrimary,
         ),
-        home: const LectureListRoute(),
+        home: FirebaseAuth.instance.currentUser == null
+            ? AuthRoute()
+            : const LectureListRoute(),
       ),
     );
   }

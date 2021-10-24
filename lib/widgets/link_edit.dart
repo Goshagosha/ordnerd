@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:student_notekeeper/models/helpers/linktype.dart';
 import 'package:student_notekeeper/models/helpers/uritype.dart';
-import 'package:student_notekeeper/routes/link.dart';
+import 'package:student_notekeeper/models/link.dart';
+import 'package:student_notekeeper/utils/utils.dart';
 import 'package:tuple/tuple.dart';
 
 class LinkEditorWidget extends StatefulWidget {

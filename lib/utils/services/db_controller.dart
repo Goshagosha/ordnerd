@@ -21,7 +21,7 @@ class DbProvider {
       db.execute(
           'CREATE TABLE lecture(id INTEGER PRIMARY KEY, name TEXT, address TEXT, tutorium_address TEXT, custom_notes TEXT)');
       db.execute(
-          'CREATE TABLE link(id INTEGER PRIMARY KEY, lecture INTEGER, name TEXT, type TEXT, link TEXT, uritype INTEGER, extra TEXT, FOREIGN KEY(lecture) REFERENCES lecture(id))');
+          'CREATE TABLE link(id INTEGER PRIMARY KEY, lecture INTEGER, name TEXT, type INTEGER, link TEXT, uritype INTEGER, extra TEXT, FOREIGN KEY(lecture) REFERENCES lecture(id))');
 
       db.execute(
           "INSERT INTO lecture (id, name, address) VALUES (0, 'Formal Grammars 101', 'University of Arizona');");

@@ -1,6 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:student_notekeeper/models/lecture.dart';
 import 'package:student_notekeeper/routes/lecture_edit.dart';
 import 'package:student_notekeeper/utils/bloc/lecture_bloc.dart';
+import 'package:student_notekeeper/utils/services/firestore_controller.dart';
 import 'package:student_notekeeper/widgets/lecture_card.dart';
 
 class LectureListRoute extends StatefulWidget {
@@ -17,14 +22,14 @@ class _LectureListRouteState extends State<LectureListRoute> {
         appBar: AppBar(
           title: const Text("My Lectures"),
         ),
-        body: StreamBuilder<Map>(
-            stream: BlocProvider.of(context)!.bloc.lectures,
-            builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
+        body: StreamBuilder<List<Lecture>>(
+            stream: lecturesStream(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Lecture>> snapshot) {
               if (snapshot.hasData) {
                 return Column(
                   children: <Widget>[
-                    for (MapEntry entry in snapshot.data!.entries)
-                      LectureCard(id: entry.key)
+                    for (Lecture l in snapshot.data!) LectureCard(lecture: l)
                   ],
                 );
               } else {

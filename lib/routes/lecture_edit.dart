@@ -29,7 +29,6 @@ class LectureEditRoute extends StatefulWidget {
 class _LectureEditRouteState extends State<LectureEditRoute> {
   @override
   Widget build(BuildContext context) {
-    var inputDecoration = const InputDecoration(hintText: "Tutorium address");
     return Scaffold(
       appBar: AppBar(
         title:
@@ -61,7 +60,7 @@ class _LectureEditRouteState extends State<LectureEditRoute> {
             TextFormField(
               autocorrect: false,
               initialValue: widget.lecture.tutoriumAddress,
-              decoration: inputDecoration,
+              decoration: const InputDecoration(hintText: "Tutorium address"),
               onChanged: (text) => widget.lecture.tutoriumAddress = text,
             ),
             for (MapEntry each in widget.lecture.links.entries)
