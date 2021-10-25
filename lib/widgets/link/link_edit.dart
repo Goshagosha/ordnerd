@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:student_notekeeper/models/helpers/linktype.dart';
 import 'package:student_notekeeper/models/helpers/uritype.dart';
 import 'package:student_notekeeper/models/link.dart';
 import 'package:student_notekeeper/utils/utils.dart';
@@ -24,7 +23,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
             Expanded(
               child: TextFormField(
                 initialValue: widget.link.name,
-                decoration: InputDecoration(hintText: widget.link.type.toStringCustom()),
+                decoration: InputDecoration(hintText: widget.link.type),
                 onChanged: (text) => widget.link.name = text,
               ),
             ),
@@ -54,7 +53,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                           return SingleChildScrollView(
                             child: AlertDialog(
                               insetPadding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 16.0),
-                              title: Text(widget.link.type.toStringCustom() + " URI"),
+                              title: Text(widget.link.type + " URI"),
                               content: SizedBox(
                                 width: double.maxFinite,
                                 child: Row(

@@ -1,36 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:student_notekeeper/routes/authentication.dart';
-import 'package:student_notekeeper/routes/lecture_list.dart';
-import 'package:student_notekeeper/utils/bloc/lecture_bloc.dart';
-import 'package:student_notekeeper/utils/settings.dart';
+import 'package:student_notekeeper/app.dart';
+import 'package:student_notekeeper/utils/bloc/auth/firebase_authentication_repository.dart';
+import 'package:student_notekeeper/utils/bloc/auth/firebase_user_repository.dart';
+import 'package:student_notekeeper/utils/bloc/lecture/firebase_lecture_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      bloc: LecturesBloc(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: heidelbergPrimary,
-        ),
-        home: FirebaseAuth.instance.currentUser == null
-            ? AuthRoute()
-            : const LectureListRoute(),
-      ),
-    );
-  }
+  runApp(App(
+    authenticationRepository: FirebaseAuthenticationRepository(),
+    userRepository: FirebaseUserRepository(),
+    lectureRepository: FirebaseLectureRepository(),
+  ));
 }

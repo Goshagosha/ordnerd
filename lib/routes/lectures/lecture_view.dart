@@ -3,10 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:student_notekeeper/models/lecture.dart';
 import 'package:student_notekeeper/models/link.dart';
-import 'package:student_notekeeper/utils/bloc/lecture_bloc.dart';
-import 'package:student_notekeeper/routes/lecture_edit.dart';
-import 'package:student_notekeeper/widgets/lecture_qr.dart';
-import 'package:student_notekeeper/widgets/link_widget.dart';
+import 'package:student_notekeeper/routes/lectures/lecture_edit.dart';
+import 'package:student_notekeeper/widgets/lecture/lecture_qr.dart';
+import 'package:student_notekeeper/widgets/link/link_widget.dart';
 
 class LectureRoute extends StatefulWidget {
   Lecture lecture;
@@ -67,9 +66,9 @@ class _LectureRouteState extends State<LectureRoute> {
                           );
                         }).then((confirmed) {
                       if (confirmed) {
-                        BlocProvider.of(context)!
-                            .bloc
-                            .deleteLecture(widget.lecture.dbId!);
+                        // BlocProvider.of(context)!
+                        //     .bloc
+                        //     .deleteLecture(widget.lecture.dbId!);
                         Navigator.pop(context);
                       }
                     });

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_notekeeper/models/lecture.dart';
-import 'package:student_notekeeper/utils/bloc/lecture_bloc.dart';
-import 'package:student_notekeeper/widgets/link_edit.dart';
+import 'package:student_notekeeper/widgets/link/link_edit.dart';
 
 class LectureNewRoute extends LectureEditRoute {
   LectureNewRoute({Key? key})
@@ -36,7 +35,7 @@ class _LectureEditRouteState extends State<LectureEditRoute> {
         actions: <Widget>[
           IconButton(
               onPressed: () {
-                BlocProvider.of(context)!.bloc.saveLecture(widget.lecture);
+                //  BlocProvider.of(context).;
                 Navigator.of(context).pop();
               },
               icon: const Icon(Icons.save))

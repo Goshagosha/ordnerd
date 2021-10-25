@@ -1,25 +1,44 @@
-import 'package:student_notekeeper/models/helpers/linktype.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:student_notekeeper/models/helpers/uritype.dart';
 
 class Link {
   String name;
-  LinkType type;
+  String type;
   URItype uritype;
-  int? dbId;
+  String lecture;
+  String? dbId;
   String? link;
   String? extra;
 
-  Link(this.name, this.type,
-      {this.uritype = URItype.http, this.dbId, this.link, this.extra});
+  Link(
+      {required this.name,
+      required this.type,
+      required this.lecture,
+      this.dbId,
+      this.uritype = URItype.http,
+      this.link,
+      this.extra});
 
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'type': type.index,
+      'type': type,
       'link': link,
-      'id': dbId,
+      'lecture': lecture,
       'uritype': uritype.index,
       'extra': extra
     }..removeWhere((key, value) => value == null);
+  }
+
+  static Link fromSnapshot(DocumentSnapshot m) {
+    Map cast = m.data() as Map<String, dynamic>;
+    return Link(
+        name: cast['name'],
+        type: cast['type'],
+        link: cast.containsKey('link') ? cast['link'] : null,
+        dbId: m.id,
+        lecture: cast['lecture'],
+        uritype: cast.containsKey('uritype') ? cast['uritype'] : null,
+        extra: cast.containsKey('extra') ? cast['extra'] : null);
   }
 }

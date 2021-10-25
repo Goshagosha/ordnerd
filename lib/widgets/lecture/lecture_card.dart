@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:student_notekeeper/models/lecture.dart';
-import 'package:student_notekeeper/routes/lecture_route.dart';
+import 'package:student_notekeeper/routes/lectures/lecture_view.dart';
 
 class LectureCard extends StatefulWidget {
   final Lecture lecture;

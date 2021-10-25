@@ -37,13 +37,16 @@ dependencies:
   cloud_firestore: ^2.5.4
   firebase_auth: ^3.1.4
   firebase_core: ^1.8.0
+  bloc:
+  flutter_bloc:
   logger:
+  equatable:
+  formz:
 
 dev_dependencies:
   flutter_launcher_icons: ^0.9.2
   flutter_test:
     sdk: flutter
-  logger:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

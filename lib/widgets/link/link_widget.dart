@@ -21,7 +21,7 @@ class _LinkWidgetState extends State<LinkWidget> {
     return ExpansionTile(
       title: Text(widget.link.name),
       subtitle: Text(
-        widget.link.type.toStringCustom(),
+        widget.link.type,
         style: Theme.of(context).textTheme.caption,
       ),
       children: [
