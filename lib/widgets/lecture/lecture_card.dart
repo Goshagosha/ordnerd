@@ -17,10 +17,7 @@ class _LectureCardState extends State<LectureCard> {
     return Card(
         child: InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LectureRoute(lecture: widget.lecture)));
+        Navigator.push(context, LectureViewPage.route(lecture: widget.lecture));
       },
       child: ListTile(
         title: Text(

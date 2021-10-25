@@ -49,7 +49,7 @@ class _EmailInput extends StatelessWidget {
           onChanged: (email) =>
               context.read<LoginBloc>().add(LoginEmailChanged(email)),
           decoration: InputDecoration(
-            labelText: 'username',
+            labelText: 'email',
             errorText: state.email.invalid ? 'invalid email' : null,
           ),
         );

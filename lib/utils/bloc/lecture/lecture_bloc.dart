@@ -22,12 +22,13 @@ class LectureBloc extends Bloc<LectureEvent, LectureState> {
     on<LectureAdded>(onAdded);
   }
 
-  void onLoaded(LecturesRequested event, Emitter<LectureState> emit) {
+  void onLoaded(LecturesRequested event, Emitter<LectureState> emit) async {
     _lectureSubscription?.cancel();
-    _lectureSubscription =
-        _lectureRepository.lectures().listen((lectures) => add(
+    _lectureSubscription = await _lectureRepository
+        .lectures()
+        .then((value) => value.listen((lectures) => add(
               LecturesUpdated(lectures),
-            ));
+            )));
   }
 
   void onAdded(LectureAdded event, Emitter<LectureState> emit) async =>

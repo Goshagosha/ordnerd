@@ -25,22 +25,25 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
-        value: authenticationRepository,
-        child: RepositoryProvider.value(
-          value: lectureRepository,
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<AuthenticationBloc>(
-                  create: (_) => AuthenticationBloc(
-                      authenticationRepository: authenticationRepository,
-                      userRepository: userRepository)),
-              BlocProvider<LectureBloc>(
-                  create: (_) =>
-                      LectureBloc(lectureRepository: lectureRepository)),
-            ],
-            child: const AppView(),
-          ),
-        ));
+      value: userRepository,
+      child: RepositoryProvider.value(
+          value: authenticationRepository,
+          child: RepositoryProvider.value(
+            value: lectureRepository,
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider<AuthenticationBloc>(
+                    create: (_) => AuthenticationBloc(
+                        authenticationRepository: authenticationRepository,
+                        userRepository: userRepository)),
+                BlocProvider<LectureBloc>(
+                    create: (_) =>
+                        LectureBloc(lectureRepository: lectureRepository)),
+              ],
+              child: const AppView(),
+            ),
+          )),
+    );
   }
 }
 

@@ -16,4 +16,9 @@ class FirebaseUserRepository implements UserRepository {
   Future<bool> isAuthenticated() async {
     return _firebaseAuth.currentUser != null;
   }
+
+  @override
+  Future<String> getHumanReadableIdentifier() async {
+    return _firebaseAuth.currentUser?.email ?? '';
+  }
 }

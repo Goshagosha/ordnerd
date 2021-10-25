@@ -10,8 +10,8 @@ class Lecture {
 
   Map<String, Link> links = {};
 
-  Lecture(
-    this.name, {
+  Lecture({
+    this.name = '',
     this.dbId,
     this.address,
     this.tutoriumAddress,
@@ -20,7 +20,8 @@ class Lecture {
 
   static Lecture fromSnapshot(DocumentSnapshot m) {
     Map cast = m.data() as Map<String, dynamic>;
-    Lecture l = Lecture(cast['name'],
+    Lecture l = Lecture(
+        name: cast['name'],
         dbId: m.id,
         address: cast.containsKey('address') ? cast['address'] : null,
         tutoriumAddress: cast.containsKey('tutoriumAddress')
@@ -29,9 +30,8 @@ class Lecture {
         customNotes:
             cast.containsKey('customNotes') ? cast['customNotes'] : null);
 
-    // l.links = Map.fromIterable((m['links'] as List),
-    //     key: (eachLink) => ((eachLink as Map)['type']),
-    //     value: (eachLink) => Link.fromMap(eachLink));
+    l.links = (m['links'] as Map)
+        .map((key, value) => MapEntry(key, Link.fromMap(value)));
     return l;
   }
 
@@ -42,7 +42,7 @@ class Lecture {
       'address': address,
       'tutorium_address': tutoriumAddress,
       'custom_notes': customNotes,
-      'links': links
+      'links': links.map((key, value) => MapEntry(key, value.toMap()))
     }..removeWhere((key, value) => value == null);
   }
 

@@ -27,6 +27,12 @@ class AuthenticationBloc
   void _onAuthenticationStatusChange(
       AuthenticationStatusChange event, emit) async {
     switch (event.status) {
+      case AuthenticationStatus.unknown:
+        final userId = await _tryGetUserId();
+        emit(userId != null
+            ? const AuthenticationState.authenticated()
+            : const AuthenticationState.unauthenticated());
+        break;
       case AuthenticationStatus.authenticated:
         final userId = await _tryGetUserId();
         emit(userId != null
@@ -50,7 +56,10 @@ class AuthenticationBloc
     }
   }
 
-  void _onLogoutRequested(AuthenticationLogoutRequested event, emit) async {}
+  void _onLogoutRequested(AuthenticationLogoutRequested event, emit) async {
+    _authenticationRepository.logOut();
+    emit(const AuthenticationState.unauthenticated());
+  }
 
   @override
   Future<void> close() {
