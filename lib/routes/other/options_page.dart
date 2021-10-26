@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/routes/other/password_change.dart';
 import 'package:student_notekeeper/utils/bloc/auth/base/authentication_bloc.dart';
 import 'package:student_notekeeper/utils/bloc/auth/base/authentication_events.dart';
 import 'package:student_notekeeper/utils/bloc/auth/base/user_repository.dart';
@@ -45,10 +44,10 @@ class _OptionsPageState extends State<OptionsPage> {
               ),
             ),
             ListTile(
-              title: Text("Change password"),
+              title: Text("Reset password"),
               trailing: Icon(Icons.lock),
-              onTap: () =>
-                  Navigator.of(context).push(PasswordChangePage.route()),
+              onTap: () => RepositoryProvider.of<UserRepository>(context)
+                  .sendPasswordResetEmail(),
             )
           ],
         ));

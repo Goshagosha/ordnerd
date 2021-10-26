@@ -4,4 +4,6 @@ abstract class UserRepository {
   Future<String> getUserId();
 
   Future<String> getHumanReadableIdentifier();
+
+  Future<void> sendPasswordResetEmail();
 }
