@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:student_notekeeper/models/helpers/linktype.dart';
 import 'package:student_notekeeper/models/lecture.dart';
 import 'package:student_notekeeper/models/link.dart';
+import 'package:student_notekeeper/routes/other/qr_scanner.dart';
 import 'package:student_notekeeper/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:student_notekeeper/utils/bloc/lecture/lecture_events.dart';
 import 'package:student_notekeeper/widgets/link/link_edit.dart';
@@ -12,10 +14,10 @@ class LectureEditPage extends StatefulWidget {
   late final bool _isNew;
 
   LectureEditPage({Key? key, this.lecture}) : super(key: key) {
-    _isNew = lecture == null;
-    if (_isNew) {
-      lecture = Lecture();
-    }
+    _isNew = lecture?.dbId == null;
+
+    /// Only instantiate new if not in database, do not instantiate new if its freshly imported:
+    lecture ??= Lecture();
   }
 
   static Route route({Lecture? lecture}) {
@@ -37,13 +39,19 @@ class _LectureEditPageState extends State<LectureEditPage> {
             widget._isNew ? "New lecture" : "Edit " + widget.lecture!.name),
         actions: <Widget>[
           IconButton(
+            icon: const Icon(Icons.qr_code_scanner),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(QRScannerPage.route());
+            },
+          ),
+          IconButton(
+              icon: const Icon(Icons.save),
               onPressed: () {
                 BlocProvider.of<LectureBloc>(context).add(widget._isNew
                     ? LectureAdded(widget.lecture!)
                     : LectureUpdated(widget.lecture!));
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.save))
+                Navigator.of(context).pop(widget.lecture);
+              }),
         ],
       ),
       body: Padding(
@@ -67,8 +75,8 @@ class _LectureEditPageState extends State<LectureEditPage> {
               decoration: const InputDecoration(hintText: "Tutorium address"),
               onChanged: (text) => widget.lecture!.tutoriumAddress = text,
             ),
-            for (String eachLinkType in linkType)
-              LinkEditorWidget(link: Link(type: eachLinkType, name: '')),
+            for (String key in linkType)
+              LinkEditorWidget(link: widget.lecture!.links[key]!),
             TextFormField(
               initialValue: widget.lecture!.customNotes,
               decoration: const InputDecoration(hintText: "Custom notes"),

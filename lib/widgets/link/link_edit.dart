@@ -33,7 +33,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                       context: context,
                       builder: (context) {
                         final TextEditingController tec = TextEditingController(
-                            text: widget.link.link ??
+                            text: widget.link.link.isNotEmpty ? widget.link.link :
                                 widget.link.name
                                 );
                         tec.selection = TextSelection(
@@ -48,6 +48,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
 
                           URItype uritype = widget.link.uritype;
                           /// This is a link editor dialog. It's wrapped in stateful builder so we can call SetState from it.
+                          /// We want to call setState from it to reflect updates to the protocol selection dropdown.
                         return StatefulBuilder(builder: (context, setState) {
                           String text = widget.link.link.elseEmpty();
                           return SingleChildScrollView(
@@ -123,13 +124,12 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                     setState(() {
                       widget.link.uritype = tuple.item1;
                       widget.link.link = tuple.item2;
-                        if (widget.link.name.isEmpty && widget.link.link!.isNotEmpty) showDialog(context: context, builder: (context) => AlertDialog(content: const Text("This link won't save unless you give it a name!"), actions: [TextButton(onPressed: () {Navigator.of(context).pop();}, child: const Text("OK"))],));
                     });
                   }
                 },
                 icon: Icon(
                   Icons.link,
-                  color: (widget.link.link != "")
+                  color: (widget.link.link.isNotEmpty)
                       ? Theme.of(context).primaryColor
                       : Theme.of(context).disabledColor,
                 ),),
@@ -194,7 +194,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                   },
                 icon: Icon(
                   Icons.short_text,
-                  color: (widget.link.extra != null)
+                  color: (widget.link.extra.isNotEmpty)
                       ? Theme.of(context).primaryColor
                       : Theme.of(context).disabledColor,
                 ),

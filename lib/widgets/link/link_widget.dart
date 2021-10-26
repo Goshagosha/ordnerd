@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:student_notekeeper/models/helpers/linktype.dart';
 import 'package:student_notekeeper/models/helpers/uritype.dart';
 import 'package:student_notekeeper/models/link.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,15 +24,15 @@ class _LinkWidgetState extends State<LinkWidget> {
         style: Theme.of(context).textTheme.caption,
       ),
       children: [
-        if (widget.link.link != null)
+        if (widget.link.link.isNotEmpty)
           ListTile(
               title: Text(
-                widget.link.link!,
+                widget.link.link,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
               onTap: () {
                 String fullLink =
-                    widget.link.uritype.protocol() + widget.link.link!;
+                    widget.link.uritype.protocol() + widget.link.link;
                 canLaunch(fullLink).then((can) => can
                     ? launch(fullLink)
                     : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -42,11 +41,11 @@ class _LinkWidgetState extends State<LinkWidget> {
               trailing: Icon(widget.link.uritype == URItype.http
                   ? Icons.link
                   : Icons.alternate_email)),
-        if (widget.link.extra != null)
+        if (widget.link.extra.isNotEmpty)
           InkWell(
             child: ListTile(
                 title: Text(
-                  widget.link.extra!,
+                  widget.link.extra,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 onTap: () {
@@ -59,6 +58,8 @@ class _LinkWidgetState extends State<LinkWidget> {
                   Icons.short_text,
                 )),
           ),
+        if (widget.link.extra.isEmpty && widget.link.link.isEmpty)
+          Center(child: Text("- - -"))
       ],
     );
   }

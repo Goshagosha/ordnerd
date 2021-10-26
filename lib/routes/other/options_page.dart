@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:student_notekeeper/routes/other/password_change.dart';
 import 'package:student_notekeeper/utils/bloc/auth/base/authentication_bloc.dart';
 import 'package:student_notekeeper/utils/bloc/auth/base/authentication_events.dart';
 import 'package:student_notekeeper/utils/bloc/auth/base/user_repository.dart';
@@ -29,18 +30,25 @@ class _OptionsPageState extends State<OptionsPage> {
                   future: RepositoryProvider.of<UserRepository>(context)
                       .getHumanReadableIdentifier(),
                   builder: (_, AsyncSnapshot<String> snap) {
-                    if (snap.hasData)
+                    if (snap.hasData) {
                       return Text(snap.data!);
-                    else
-                      return LinearProgressIndicator();
+                    } else {
+                      return const LinearProgressIndicator();
+                    }
                   }),
               subtitle: const Text("profile"),
               trailing: IconButton(
-                icon: Icon(Icons.logout),
+                icon: const Icon(Icons.logout),
                 onPressed: () => context
                     .read<AuthenticationBloc>()
                     .add(AuthenticationLogoutRequested()),
               ),
+            ),
+            ListTile(
+              title: Text("Change password"),
+              trailing: Icon(Icons.lock),
+              onTap: () =>
+                  Navigator.of(context).push(PasswordChangePage.route()),
             )
           ],
         ));

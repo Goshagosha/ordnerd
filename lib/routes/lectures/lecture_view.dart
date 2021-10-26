@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:student_notekeeper/models/helpers/linktype.dart';
 import 'package:student_notekeeper/models/lecture.dart';
 import 'package:student_notekeeper/models/link.dart';
 import 'package:student_notekeeper/routes/lectures/lecture_edit.dart';
@@ -50,7 +51,9 @@ class _LectureViewPageState extends State<LectureViewPage> {
                     break;
                   case "edit":
                     Navigator.push(context,
-                        LectureEditPage.route(lecture: widget.lecture));
+                            LectureEditPage.route(lecture: widget.lecture))
+                        .then((edited) => Navigator.pushReplacement(
+                            context, LectureViewPage.route(lecture: edited)));
                     break;
                   case "delete":
                     showDialog(
@@ -84,20 +87,24 @@ class _LectureViewPageState extends State<LectureViewPage> {
         ),
         body: ListView(
           children: <Widget>[
-            if (widget.lecture.address != null)
+            if (widget.lecture.address.isNotEmpty)
               ListTile(
-                title: Text(widget.lecture.address!),
+                title: Text(widget.lecture.address),
                 subtitle: const Text("lecture address"),
               ),
-            if (widget.lecture.tutoriumAddress != null)
+            if (widget.lecture.tutoriumAddress.isNotEmpty)
               ListTile(
-                title: Text(widget.lecture.tutoriumAddress!),
+                title: Text(widget.lecture.tutoriumAddress),
                 subtitle: const Text("tutorium address"),
               ),
-            for (Link each in widget.lecture.links.values)
-              LinkWidget(link: each),
-            if (widget.lecture.customNotes != null)
-              Text(widget.lecture.customNotes!)
+            for (String key in linkType)
+              if (widget.lecture.links[key]!.name.isNotEmpty)
+                LinkWidget(link: widget.lecture.links[key]!),
+            if (widget.lecture.customNotes.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(widget.lecture.customNotes),
+              )
           ],
         ));
   }

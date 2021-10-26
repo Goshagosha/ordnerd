@@ -1,34 +1,39 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:student_notekeeper/models/helpers/linktype.dart';
 import 'package:student_notekeeper/models/link.dart';
 
 class Lecture {
   String name;
   String? dbId;
-  String? address;
-  String? tutoriumAddress;
-  String? customNotes;
+  String address;
+  String tutoriumAddress;
+  String customNotes;
 
-  Map<String, Link> links = {};
+  Map<String, Link> links = {
+    for (String k in linkType) k: Link(name: '', type: k)
+  };
 
   Lecture({
     this.name = '',
     this.dbId,
-    this.address,
-    this.tutoriumAddress,
-    this.customNotes,
+    this.address = '',
+    this.tutoriumAddress = '',
+    this.customNotes = '',
   });
 
-  static Lecture fromSnapshot(DocumentSnapshot m) {
-    Map cast = m.data() as Map<String, dynamic>;
+  static Lecture fromSnapshot(DocumentSnapshot snap) {
+    Map cast = snap.data() as Map<String, dynamic>;
+    cast['dbId'] = snap.id;
+    return fromMap(cast);
+  }
+
+  static Lecture fromMap(Map m) {
     Lecture l = Lecture(
-        name: cast['name'],
-        dbId: m.id,
-        address: cast.containsKey('address') ? cast['address'] : null,
-        tutoriumAddress: cast.containsKey('tutoriumAddress')
-            ? cast['tutoriumAddress']
-            : null,
-        customNotes:
-            cast.containsKey('customNotes') ? cast['customNotes'] : null);
+        name: m['name'],
+        dbId: m.containsKey('dbId') ? m['dbId'] : null,
+        address: m['address'],
+        tutoriumAddress: m['tutorium_address'],
+        customNotes: m['custom_notes']);
 
     l.links = (m['links'] as Map)
         .map((key, value) => MapEntry(key, Link.fromMap(value)));
@@ -44,6 +49,18 @@ class Lecture {
       'custom_notes': customNotes,
       'links': links.map((key, value) => MapEntry(key, value.toMap()))
     }..removeWhere((key, value) => value == null);
+  }
+
+  /// We need to override [hashCode] and [==] so that when lecture values are updated,
+  /// the widget tree will recognize the change and update the LectureCard widgets
+  /// in the LectureList.
+  @override
+  int get hashCode => toMap().hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! Lecture) return false;
+    return dbId == other.dbId;
   }
 
   // String toJson() {

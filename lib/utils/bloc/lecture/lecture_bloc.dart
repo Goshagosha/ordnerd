@@ -34,8 +34,10 @@ class LectureBloc extends Bloc<LectureEvent, LectureState> {
   void onAdded(LectureAdded event, Emitter<LectureState> emit) async =>
       await _lectureRepository.addNewLecture(event.lecture);
 
-  void onUpdated(LectureUpdated event, Emitter<LectureState> emit) async =>
-      await _lectureRepository.updateLecture(event.lecture);
+  void onUpdated(LectureUpdated event, Emitter<LectureState> emit) async {
+    await _lectureRepository.updateLecture(event.lecture);
+    add(LecturesRequested());
+  }
 
   void onDeleted(LectureDeleted event, Emitter<LectureState> emit) async =>
       await _lectureRepository.deleteLecture(event.lecture);

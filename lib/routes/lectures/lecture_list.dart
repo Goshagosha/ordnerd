@@ -47,7 +47,10 @@ class _LectureListState extends State<LectureList> {
               return Column(
                 children: <Widget>[
                   for (Lecture l in (state as LecturesLoadSuccess).lectures)
-                    LectureCard(lecture: l)
+                    LectureCard(
+                      lecture: l,
+                      key: Key(l.hashCode.toString()),
+                    )
                 ],
               );
           }
