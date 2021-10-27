@@ -44,10 +44,24 @@ class _OptionsPageState extends State<OptionsPage> {
               ),
             ),
             ListTile(
-              title: Text("Reset password"),
-              trailing: Icon(Icons.lock),
-              onTap: () => RepositoryProvider.of<UserRepository>(context)
-                  .sendPasswordResetEmail(),
+              title: const Text("Reset password"),
+              trailing: const Icon(Icons.lock),
+              onTap: () {
+                RepositoryProvider.of<UserRepository>(context)
+                    .sendPasswordResetEmail();
+                showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                          title: const Text("Reset password"),
+                          content: const Text(
+                              "Link with instructions has been sent to your email address"),
+                          actions: [
+                            TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: const Text("OK"))
+                          ],
+                        ));
+              },
             )
           ],
         ));
