@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/login/login_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/login/login_events.dart';
-import 'package:student_notekeeper/utils/bloc/login/login_states.dart';
+import 'package:ordnerd/utils/bloc/login/login_bloc.dart';
+import 'package:ordnerd/utils/bloc/login/login_events.dart';
+import 'package:ordnerd/utils/bloc/login/login_states.dart';
 import 'package:formz/formz.dart';
 
 class LoginForm extends StatelessWidget {

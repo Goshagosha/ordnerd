@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:student_notekeeper/models/helpers/uritype.dart';
-import 'package:student_notekeeper/models/link.dart';
+import 'package:ordnerd/models/helpers/uritype.dart';
+import 'package:ordnerd/models/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LinkWidget extends StatefulWidget {

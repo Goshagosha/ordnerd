@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_events.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_repository.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_states.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_repository.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_states.dart';
 
 class LectureBloc extends Bloc<LectureEvent, LectureState> {
   final LectureRepository _lectureRepository;

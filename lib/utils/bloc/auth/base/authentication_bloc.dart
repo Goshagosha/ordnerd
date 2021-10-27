@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_events.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_repository.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_states.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/user_repository.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_events.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_repository.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_states.dart';
+import 'package:ordnerd/utils/bloc/auth/base/user_repository.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/routes/auth/login_page.dart';
-import 'package:student_notekeeper/routes/lectures/lecture_list.dart';
-import 'package:student_notekeeper/routes/other/splash_page.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_repository.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_states.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/user_repository.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_repository.dart';
-import 'package:student_notekeeper/utils/settings.dart';
+import 'package:ordnerd/routes/auth/login_page.dart';
+import 'package:ordnerd/routes/lectures/lecture_list.dart';
+import 'package:ordnerd/routes/other/splash_page.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_bloc.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_repository.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_states.dart';
+import 'package:ordnerd/utils/bloc/auth/base/user_repository.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_repository.dart';
+import 'package:ordnerd/utils/settings.dart';
 
 class App extends StatelessWidget {
   const App(

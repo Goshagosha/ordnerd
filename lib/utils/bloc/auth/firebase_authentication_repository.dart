@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_repository.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_repository.dart';
 
 class FirebaseAuthenticationRepository extends AuthenticationRepository {
   final FirebaseAuth _firebaseAuthInstance = FirebaseAuth.instance;

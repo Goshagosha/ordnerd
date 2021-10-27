@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'package:student_notekeeper/models/authentication/models.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_repository.dart';
-import 'package:student_notekeeper/utils/bloc/login/login_events.dart';
-import 'package:student_notekeeper/utils/bloc/login/login_states.dart';
+import 'package:ordnerd/models/authentication/models.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_repository.dart';
+import 'package:ordnerd/utils/bloc/login/login_events.dart';
+import 'package:ordnerd/utils/bloc/login/login_states.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({required AuthenticationRepository authenticationRepository})

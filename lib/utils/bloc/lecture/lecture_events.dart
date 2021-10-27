@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:student_notekeeper/models/lecture.dart';
+import 'package:ordnerd/models/lecture.dart';
 
 abstract class LectureEvent extends Equatable {
   const LectureEvent();

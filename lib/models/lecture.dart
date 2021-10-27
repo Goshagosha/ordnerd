@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:student_notekeeper/models/helpers/linktype.dart';
-import 'package:student_notekeeper/models/link.dart';
+import 'package:ordnerd/models/helpers/linktype.dart';
+import 'package:ordnerd/models/link.dart';
 
 class Lecture {
   String name;

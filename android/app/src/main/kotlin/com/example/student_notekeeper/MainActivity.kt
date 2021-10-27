@@ -1,4 +1,4 @@
-package com.github.goshagosha.student_notekeeper
+package com.github.goshagosha.ordnerd
 
 import io.flutter.embedding.android.FlutterActivity
 

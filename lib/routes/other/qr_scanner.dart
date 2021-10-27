@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:path/path.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:student_notekeeper/models/lecture.dart';
-import 'package:student_notekeeper/routes/lectures/lecture_edit.dart';
+import 'package:ordnerd/models/lecture.dart';
+import 'package:ordnerd/routes/lectures/lecture_edit.dart';
 
 class QRScannerPage extends StatefulWidget {
   const QRScannerPage({Key? key}) : super(key: key);

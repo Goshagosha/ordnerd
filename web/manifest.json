@@ -1,6 +1,6 @@
 {
-    "name": "student_notekeeper",
-    "short_name": "student_notekeeper",
+    "name": "ordnerd",
+    "short_name": "ordnerd",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

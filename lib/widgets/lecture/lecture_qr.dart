@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:student_notekeeper/models/lecture.dart';
+import 'package:ordnerd/models/lecture.dart';
 
 class QrLectureDialog extends StatelessWidget {
   final Lecture lecture;

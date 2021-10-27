@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_repository.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_repository.dart';
 
 class AuthenticationState extends Equatable {
   final AuthenticationStatus status;

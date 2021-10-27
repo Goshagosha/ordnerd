@@ -2,14 +2,14 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/models/helpers/linktype.dart';
-import 'package:student_notekeeper/models/lecture.dart';
-import 'package:student_notekeeper/models/link.dart';
-import 'package:student_notekeeper/routes/lectures/lecture_edit.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_events.dart';
-import 'package:student_notekeeper/widgets/lecture/lecture_qr.dart';
-import 'package:student_notekeeper/widgets/link/link_widget.dart';
+import 'package:ordnerd/models/helpers/linktype.dart';
+import 'package:ordnerd/models/lecture.dart';
+import 'package:ordnerd/models/link.dart';
+import 'package:ordnerd/routes/lectures/lecture_edit.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
+import 'package:ordnerd/widgets/lecture/lecture_qr.dart';
+import 'package:ordnerd/widgets/link/link_widget.dart';
 
 class LectureViewPage extends StatefulWidget {
   Lecture lecture;

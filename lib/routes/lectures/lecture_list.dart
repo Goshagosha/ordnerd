@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/models/lecture.dart';
-import 'package:student_notekeeper/routes/lectures/lecture_edit.dart';
-import 'package:student_notekeeper/routes/other/options_page.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_events.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_states.dart';
-import 'package:student_notekeeper/widgets/lecture/lecture_card.dart';
+import 'package:ordnerd/models/lecture.dart';
+import 'package:ordnerd/routes/lectures/lecture_edit.dart';
+import 'package:ordnerd/routes/other/options_page.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_states.dart';
+import 'package:ordnerd/widgets/lecture/lecture_card.dart';
 
 class LectureList extends StatefulWidget {
   const LectureList({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import 'package:student_notekeeper/models/authentication/models.dart';
+import 'package:ordnerd/models/authentication/models.dart';
 
 class LoginState extends Equatable {
   const LoginState(

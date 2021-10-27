@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:student_notekeeper/models/lecture.dart';
+import 'package:ordnerd/models/lecture.dart';
 
 Stream<List<Lecture>> lecturesStream() {
   if (FirebaseAuth.instance.currentUser == null) {

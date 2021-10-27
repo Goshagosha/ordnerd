@@ -1,4 +1,4 @@
-import 'package:student_notekeeper/models/helpers/uritype.dart';
+import 'package:ordnerd/models/helpers/uritype.dart';
 
 class Link {
   String name;

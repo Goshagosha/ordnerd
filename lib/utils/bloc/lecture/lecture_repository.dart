@@ -1,5 +1,5 @@
-import 'package:student_notekeeper/models/lecture.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/user_repository.dart';
+import 'package:ordnerd/models/lecture.dart';
+import 'package:ordnerd/utils/bloc/auth/base/user_repository.dart';
 
 abstract class LectureRepository {
   final UserRepository _userRepository;

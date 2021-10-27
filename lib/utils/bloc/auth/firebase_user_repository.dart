@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/user_repository.dart';
+import 'package:ordnerd/utils/bloc/auth/base/user_repository.dart';
 
 class FirebaseUserRepository implements UserRepository {
   final FirebaseAuth _firebaseAuth;

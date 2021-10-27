@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_bloc.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/authentication_events.dart';
-import 'package:student_notekeeper/utils/bloc/auth/base/user_repository.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_bloc.dart';
+import 'package:ordnerd/utils/bloc/auth/base/authentication_events.dart';
+import 'package:ordnerd/utils/bloc/auth/base/user_repository.dart';
 
 class OptionsPage extends StatefulWidget {
   const OptionsPage({Key? key}) : super(key: key);

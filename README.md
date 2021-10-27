@@ -1,4 +1,4 @@
-# student_notekeeper
+# ordnerd
 
 Me and my adhd have gotten very frustrated that even within one faculty different professors use different services for teaching: between moodle, mamph, personal websites and youtube channels I spend first two months every semester organizing bookmarks in my browser toolbar. So I have written this app to keep all links to various resources of each lecture/seminar/whathaveyou in one place.
 
@@ -11,7 +11,7 @@ Coded in anger, refactoring may be required :)
   
 ## Installation
 
-Just grab an apk from [latest](https://github.com/Goshagosha/student_notekeeper/releases/latest) release
+Just grab an apk from [latest](https://github.com/Goshagosha/ordnerd/releases/latest) release
 
 ## Compilation
 First of all you want [flutter](https://flutter.dev)

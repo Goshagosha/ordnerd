@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:student_notekeeper/models/lecture.dart';
-import 'package:student_notekeeper/utils/bloc/lecture/lecture_repository.dart';
+import 'package:ordnerd/models/lecture.dart';
+import 'package:ordnerd/utils/bloc/lecture/lecture_repository.dart';
 
 class FirebaseLectureRepository extends LectureRepository {
   CollectionReference? _lectures;
