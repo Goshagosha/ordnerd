@@ -5,5 +5,5 @@ abstract class UserRepository {
 
   Future<String> getHumanReadableIdentifier();
 
-  Future<void> sendPasswordResetEmail();
+  Future<void> sendPasswordResetEmail({String email});
 }

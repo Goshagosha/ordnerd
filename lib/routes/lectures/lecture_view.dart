@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ordnerd/models/helpers/linktype.dart';
 import 'package:ordnerd/models/lecture.dart';
-import 'package:ordnerd/models/link.dart';
 import 'package:ordnerd/routes/lectures/lecture_edit.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
+import 'package:ordnerd/widgets/lecture/confirmation_dialog.dart';
 import 'package:ordnerd/widgets/lecture/lecture_qr.dart';
 import 'package:ordnerd/widgets/link/link_widget.dart';
 
@@ -59,19 +59,8 @@ class _LectureViewPageState extends State<LectureViewPage> {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return AlertDialog(
-                            title: const Text("Are you sure?"),
-                            actions: [
-                              TextButton(
-                                  onPressed: () =>
-                                      Navigator.of(context).pop(false),
-                                  child: const Text("Cancel")),
-                              TextButton(
-                                  onPressed: () =>
-                                      Navigator.of(context).pop(true),
-                                  child: const Text("Delete"))
-                            ],
-                          );
+                          return const ConfirmationDialog(
+                              okayButtonTitle: "Delete");
                         }).then((confirmed) {
                       if (confirmed) {
                         BlocProvider.of<LectureBloc>(context)

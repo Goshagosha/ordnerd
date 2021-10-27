@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ordnerd/routes/auth/register_page.dart';
+import 'package:ordnerd/routes/auth/reset_password_page.dart';
 import 'package:ordnerd/utils/bloc/login/login_bloc.dart';
 import 'package:ordnerd/utils/bloc/login/login_events.dart';
 import 'package:ordnerd/utils/bloc/login/login_states.dart';
@@ -20,17 +22,19 @@ class LoginForm extends StatelessWidget {
         }
       },
       child: Align(
-        alignment: const Alignment(0, -1 / 3),
+        alignment: const Alignment(0, -1 / 2),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             _EmailInput(),
-            const Padding(padding: EdgeInsets.all(16)),
+            const Padding(padding: EdgeInsets.all(8)),
             _PasswordInput(),
-            const Padding(padding: EdgeInsets.all(16)),
-            _LoginButton(),
-            const Padding(padding: EdgeInsets.all(16)),
-            _SignupButton(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _SigninButton(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _ForgotButton(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _ToRegisterPage(),
           ],
         ),
       ),
@@ -71,7 +75,9 @@ class _PasswordInput extends StatelessWidget {
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'password',
-            errorText: state.password.invalid ? 'invalid password' : null,
+            errorText: state.password.invalid
+                ? 'invalid password (minimum of 6 symbols)'
+                : null,
           ),
         );
       },
@@ -79,7 +85,7 @@ class _PasswordInput extends StatelessWidget {
   }
 }
 
-class _LoginButton extends StatelessWidget {
+class _SigninButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
@@ -89,7 +95,7 @@ class _LoginButton extends StatelessWidget {
             ? const CircularProgressIndicator()
             : ElevatedButton(
                 key: const Key('loginForm_continue_raisedButton'),
-                child: const Text('Login'),
+                child: const Text('Sign in'),
                 onPressed: state.status.isValidated
                     ? () {
                         context.read<LoginBloc>().add(const LoginSubmitted());
@@ -101,7 +107,7 @@ class _LoginButton extends StatelessWidget {
   }
 }
 
-class _SignupButton extends StatelessWidget {
+class _ForgotButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
@@ -109,16 +115,25 @@ class _SignupButton extends StatelessWidget {
       builder: (context, state) {
         return state.status.isSubmissionInProgress
             ? const CircularProgressIndicator()
-            : ElevatedButton(
-                key: const Key('loginForm_signup_raisedButton'),
-                child: const Text('Signup'),
-                onPressed: state.status.isValidated
-                    ? () {
-                        context.read<LoginBloc>().add(const SignupSubmitted());
-                      }
-                    : null,
+            : OutlinedButton(
+                key: const Key('loginForm_forgotButton_raisedButton'),
+                child: const Text('I forgot my password'),
+                onPressed: state.status.isSubmissionInProgress
+                    ? () {}
+                    : () =>
+                        Navigator.of(context).push(ResetPasswordPage.route()),
               );
       },
     );
+  }
+}
+
+class _ToRegisterPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+        child: const Text('I don\'t have an account'),
+        onPressed: () =>
+            Navigator.of(context).pushReplacement(RegisterPage.route()));
   }
 }

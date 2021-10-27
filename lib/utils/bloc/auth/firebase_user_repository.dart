@@ -23,8 +23,8 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<void> sendPasswordResetEmail() {
+  Future<void> sendPasswordResetEmail({String? email}) {
     return _firebaseAuth.sendPasswordResetEmail(
-        email: _firebaseAuth.currentUser!.email!);
+        email: email ?? _firebaseAuth.currentUser!.email!);
   }
 }

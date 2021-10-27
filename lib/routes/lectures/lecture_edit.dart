@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:ordnerd/models/helpers/linktype.dart';
 import 'package:ordnerd/models/lecture.dart';
-import 'package:ordnerd/models/link.dart';
 import 'package:ordnerd/routes/other/qr_scanner.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';

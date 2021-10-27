@@ -8,6 +8,8 @@ class Email extends FormzInput<String, EmailValidationError> {
 
   @override
   EmailValidationError? validator(String? value) {
-    return value?.isNotEmpty == true ? null : EmailValidationError.empty;
+    if (value == null) return EmailValidationError.empty;
+    if (!RegExp('^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,7})+\$')
+        .hasMatch(value)) return EmailValidationError.empty;
   }
 }
