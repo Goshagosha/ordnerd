@@ -11,6 +11,7 @@ import 'package:ordnerd/utils/bloc/auth/base/user_repository.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_repository.dart';
 import 'package:ordnerd/utils/settings.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class App extends StatelessWidget {
   const App(
@@ -75,7 +76,8 @@ class _AppViewState extends State<AppView> {
                 break;
               case AuthenticationStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(
-                    RegisterPage.route(), (route) => false);
+                    kIsWeb ? LoginPage.route() : RegisterPage.route(),
+                    (route) => false);
                 break;
               default:
                 break;

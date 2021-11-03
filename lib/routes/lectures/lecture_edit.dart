@@ -5,7 +5,9 @@ import 'package:ordnerd/models/lecture.dart';
 import 'package:ordnerd/routes/other/qr_scanner.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
+import 'package:ordnerd/utils/settings.dart';
 import 'package:ordnerd/widgets/link/link_edit.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class LectureEditPage extends StatefulWidget {
   Lecture? lecture;
@@ -42,14 +44,15 @@ class _LectureEditPageState extends State<LectureEditPage> {
               Navigator.of(context).pushReplacement(QRScannerPage.route());
             },
           ),
-          IconButton(
-              icon: const Icon(Icons.save),
-              onPressed: () {
-                BlocProvider.of<LectureBloc>(context).add(widget._isNew
-                    ? LectureAdded(widget.lecture!)
-                    : LectureUpdated(widget.lecture!));
-                Navigator.of(context).pop(widget.lecture);
-              }),
+          if (!kIsWeb)
+            IconButton(
+                icon: const Icon(Icons.save),
+                onPressed: () {
+                  BlocProvider.of<LectureBloc>(context).add(widget._isNew
+                      ? LectureAdded(widget.lecture!)
+                      : LectureUpdated(widget.lecture!));
+                  Navigator.of(context).pop(widget.lecture);
+                }),
         ],
       ),
       body: Padding(

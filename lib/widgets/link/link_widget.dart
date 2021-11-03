@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ordnerd/models/helpers/linktype.dart';
 import 'package:ordnerd/models/helpers/uritype.dart';
 import 'package:ordnerd/models/link.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -20,7 +21,7 @@ class _LinkWidgetState extends State<LinkWidget> {
     return ExpansionTile(
       title: Text(widget.link.name),
       subtitle: Text(
-        widget.link.type,
+        widget.link.type.toHumanReadable(),
         style: Theme.of(context).textTheme.caption,
       ),
       children: [

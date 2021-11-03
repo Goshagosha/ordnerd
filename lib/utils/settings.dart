@@ -12,3 +12,5 @@ MaterialColor heidelbergPrimary = const MaterialColor(0xffcc0130, {
   800: Color(0xffb9011e),
   900: Color(0xffad0013),
 });
+
+BoxConstraints boundWidth = const BoxConstraints(maxWidth: 400);

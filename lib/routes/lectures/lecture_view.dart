@@ -7,6 +7,7 @@ import 'package:ordnerd/models/lecture.dart';
 import 'package:ordnerd/routes/lectures/lecture_edit.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
+import 'package:ordnerd/utils/settings.dart';
 import 'package:ordnerd/widgets/lecture/confirmation_dialog.dart';
 import 'package:ordnerd/widgets/lecture/lecture_qr.dart';
 import 'package:ordnerd/widgets/link/link_widget.dart';

@@ -6,6 +6,7 @@ import 'package:ordnerd/utils/bloc/login/login_bloc.dart';
 import 'package:ordnerd/utils/bloc/login/login_events.dart';
 import 'package:ordnerd/utils/bloc/login/login_states.dart';
 import 'package:formz/formz.dart';
+import 'package:ordnerd/utils/settings.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -23,19 +24,22 @@ class LoginForm extends StatelessWidget {
       },
       child: Align(
         alignment: const Alignment(0, -1 / 2),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _EmailInput(),
-            const Padding(padding: EdgeInsets.all(8)),
-            _PasswordInput(),
-            const Padding(padding: EdgeInsets.all(8)),
-            _SigninButton(),
-            const Padding(padding: EdgeInsets.all(8)),
-            _ForgotButton(),
-            const Padding(padding: EdgeInsets.all(8)),
-            _ToRegisterPage(),
-          ],
+        child: Container(
+          constraints: boundWidth,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _EmailInput(),
+              const Padding(padding: EdgeInsets.all(8)),
+              _PasswordInput(),
+              const Padding(padding: EdgeInsets.all(8)),
+              _SigninButton(),
+              const Padding(padding: EdgeInsets.all(8)),
+              _ForgotButton(),
+              const Padding(padding: EdgeInsets.all(8)),
+              _ToRegisterPage(),
+            ],
+          ),
         ),
       ),
     );

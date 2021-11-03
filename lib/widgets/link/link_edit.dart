@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ordnerd/models/helpers/linktype.dart';
 import 'package:ordnerd/models/helpers/uritype.dart';
 import 'package:ordnerd/models/link.dart';
 import 'package:ordnerd/utils/utils.dart';
@@ -54,7 +55,7 @@ class _LinkEditorWidgetState extends State<LinkEditorWidget> {
                           return SingleChildScrollView(
                             child: AlertDialog(
                               insetPadding: const EdgeInsets.fromLTRB(16.0, 64.0, 16.0, 16.0),
-                              title: Text(widget.link.type + " URI"),
+                              title: Text(widget.link.type.toHumanReadable() + " URI"),
                               content: SizedBox(
                                 width: double.maxFinite,
                                 child: Row(

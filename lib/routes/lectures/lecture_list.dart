@@ -6,6 +6,7 @@ import 'package:ordnerd/routes/other/options_page.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_states.dart';
+import 'package:ordnerd/utils/settings.dart';
 import 'package:ordnerd/widgets/lecture/lecture_card.dart';
 
 class LectureList extends StatefulWidget {
@@ -44,14 +45,20 @@ class _LectureListState extends State<LectureList> {
               return const Center(
                   child: Text("Failed to load the list of lectures"));
             case LectureStateStatus.done:
-              return Column(
-                children: <Widget>[
-                  for (Lecture l in (state as LecturesLoadSuccess).lectures)
-                    LectureCard(
-                      lecture: l,
-                      key: Key(l.hashCode.toString()),
-                    )
-                ],
+              return Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  constraints: boundWidth,
+                  child: Column(
+                    children: <Widget>[
+                      for (Lecture l in (state as LecturesLoadSuccess).lectures)
+                        LectureCard(
+                          lecture: l,
+                          key: Key(l.hashCode.toString()),
+                        )
+                    ],
+                  ),
+                ),
               );
           }
         }),

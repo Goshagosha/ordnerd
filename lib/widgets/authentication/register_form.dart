@@ -10,6 +10,7 @@ import 'package:formz/formz.dart';
 import 'package:ordnerd/utils/bloc/signup/signup_bloc.dart';
 import 'package:ordnerd/utils/bloc/signup/signup_events.dart';
 import 'package:ordnerd/utils/bloc/signup/signup_states.dart';
+import 'package:ordnerd/utils/settings.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -27,17 +28,20 @@ class RegisterForm extends StatelessWidget {
       },
       child: Align(
         alignment: const Alignment(0, -1 / 2),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          _EmailInput(),
-          const Padding(padding: EdgeInsets.all(8)),
-          _PasswordInput(),
-          const Padding(padding: EdgeInsets.all(8)),
-          _AcceptTermsWidget(),
-          const Padding(padding: EdgeInsets.all(8)),
-          _SignupButton(),
-          const Padding(padding: EdgeInsets.all(8)),
-          _ToLoginButton(),
-        ]),
+        child: Container(
+          constraints: boundWidth,
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            _EmailInput(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _PasswordInput(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _AcceptTermsWidget(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _SignupButton(),
+            const Padding(padding: EdgeInsets.all(8)),
+            _ToLoginButton(),
+          ]),
+        ),
       ),
     );
   }
