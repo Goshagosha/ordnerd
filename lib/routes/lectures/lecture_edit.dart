@@ -5,26 +5,23 @@ import 'package:ordnerd/models/lecture.dart';
 import 'package:ordnerd/routes/other/qr_scanner.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_bloc.dart';
 import 'package:ordnerd/utils/bloc/lecture/lecture_events.dart';
-import 'package:ordnerd/utils/settings.dart';
 import 'package:ordnerd/widgets/link/link_edit.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 class LectureEditPage extends StatefulWidget {
-  Lecture? lecture;
+  late final Lecture? lecture;
   late final bool _isNew;
 
-  LectureEditPage({Key? key, this.lecture}) : super(key: key) {
+  LectureEditPage({Key? key, required context}) : super(key: key) {
+    lecture = ModalRoute.of(context)?.settings.arguments as Lecture;
+
     _isNew = lecture?.dbId == null;
 
     /// Only instantiate new if not in database, do not instantiate new if its freshly imported:
     lecture ??= Lecture();
   }
 
-  static Route route({Lecture? lecture}) {
-    return MaterialPageRoute(builder: (context) {
-      return LectureEditPage(lecture: lecture);
-    });
-  }
+  static const routeName = '/list/edit';
 
   @override
   _LectureEditPageState createState() => _LectureEditPageState();
@@ -38,21 +35,21 @@ class _LectureEditPageState extends State<LectureEditPage> {
         title: Text(
             widget._isNew ? "New lecture" : "Edit " + widget.lecture!.name),
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.qr_code_scanner),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(QRScannerPage.route());
-            },
-          ),
           if (!kIsWeb)
             IconButton(
-                icon: const Icon(Icons.save),
-                onPressed: () {
-                  BlocProvider.of<LectureBloc>(context).add(widget._isNew
-                      ? LectureAdded(widget.lecture!)
-                      : LectureUpdated(widget.lecture!));
-                  Navigator.of(context).pop(widget.lecture);
-                }),
+              icon: const Icon(Icons.qr_code_scanner),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(QRScannerPage.route());
+              },
+            ),
+          IconButton(
+              icon: const Icon(Icons.save),
+              onPressed: () {
+                BlocProvider.of<LectureBloc>(context).add(widget._isNew
+                    ? LectureAdded(widget.lecture!)
+                    : LectureUpdated(widget.lecture!));
+                Navigator.of(context).pop(widget.lecture);
+              }),
         ],
       ),
       body: Padding(

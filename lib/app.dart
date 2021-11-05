@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ordnerd/routes/auth/login_page.dart';
 import 'package:ordnerd/routes/auth/register_page.dart';
+import 'package:ordnerd/routes/lectures/lecture_edit.dart';
 import 'package:ordnerd/routes/lectures/lecture_list.dart';
+import 'package:ordnerd/routes/lectures/lecture_view.dart';
 import 'package:ordnerd/routes/other/splash_page.dart';
 import 'package:ordnerd/utils/bloc/auth/base/authentication_bloc.dart';
 import 'package:ordnerd/utils/bloc/auth/base/authentication_repository.dart';
@@ -65,14 +67,23 @@ class _AppViewState extends State<AppView> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: heidelbergPrimary),
+      routes: {
+        LectureList.routeName: (context) => LectureList(
+              context: context,
+            ),
+        LectureViewPage.routeName: (context) =>
+            LectureViewPage(context: context),
+        LectureEditPage.routeName: (context) =>
+            LectureEditPage(context: context),
+      },
       navigatorKey: _navigatorKey,
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
             switch (state.status) {
               case AuthenticationStatus.authenticated:
-                _navigator.pushAndRemoveUntil<void>(
-                    LectureList.route(), (route) => false);
+                _navigator.pushNamedAndRemoveUntil<void>(
+                    LectureList.routeName, (route) => false);
                 break;
               case AuthenticationStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(

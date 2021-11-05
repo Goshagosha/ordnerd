@@ -45,4 +45,22 @@ class FirebaseLectureRepository extends LectureRepository {
   Future<void> updateLecture(Lecture lecture) {
     return _lectures!.doc(lecture.dbId).update(lecture.toMap());
   }
+
+  @override
+  Future<Lecture> fetchShared(String lectureId) async {
+    DocumentSnapshot snap = await FirebaseFirestore.instance
+        .collection('shared')
+        .doc(lectureId)
+        .get();
+    return Lecture.fromSnapshot(snap);
+  }
+
+  @override
+  Future<String> pushShared(Lecture lecture) async {
+    await FirebaseFirestore.instance
+        .collection('shared')
+        .doc(lecture.dbId)
+        .set(lecture.toMap());
+    return lecture.dbId!;
+  }
 }

@@ -18,4 +18,8 @@ abstract class LectureRepository {
   Future<void> deleteLecture(Lecture lecture);
 
   Future<void> updateLecture(Lecture lecture);
+
+  Future<String> pushShared(Lecture lecture);
+
+  Future<Lecture> fetchShared(String lectureId);
 }

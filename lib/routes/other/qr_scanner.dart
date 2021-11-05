@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:path/path.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:ordnerd/models/lecture.dart';
 import 'package:ordnerd/routes/lectures/lecture_edit.dart';
@@ -67,7 +65,7 @@ class _QRScannerPageState extends State<QRScannerPage> {
       Lecture scanned = Lecture.fromMap(jsonDecode(scanData.code) as Map)
         ..dbId = null;
       Navigator.of(context)
-          .pushReplacement(LectureEditPage.route(lecture: scanned));
+          .pushReplacementNamed('/list/edit', arguments: scanned);
     });
   }
 

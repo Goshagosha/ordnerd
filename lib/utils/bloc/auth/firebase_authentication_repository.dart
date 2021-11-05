@@ -4,6 +4,12 @@ import 'package:ordnerd/utils/bloc/auth/base/authentication_repository.dart';
 class FirebaseAuthenticationRepository extends AuthenticationRepository {
   final FirebaseAuth _firebaseAuthInstance = FirebaseAuth.instance;
 
+  FirebaseAuthenticationRepository() {
+    _firebaseAuthInstance.userChanges().listen((event) {
+      super.controller.add(AuthenticationStatus.authenticated);
+    });
+  }
+
   @override
   Future<UserCredential> logInImplementation(
       {required String email, required String password}) {

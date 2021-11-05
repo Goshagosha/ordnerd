@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+
 enum AuthenticationStatus {
   unknown,
   authenticated,
@@ -8,11 +10,12 @@ enum AuthenticationStatus {
 }
 
 abstract class AuthenticationRepository {
-  final _controller = StreamController<AuthenticationStatus>();
+  @protected
+  final controller = StreamController<AuthenticationStatus>();
 
   Stream<AuthenticationStatus> get status async* {
     yield AuthenticationStatus.unknown;
-    yield* _controller.stream;
+    yield* controller.stream;
   }
 
   Future<Object?> logInImplementation({
@@ -40,13 +43,13 @@ abstract class AuthenticationRepository {
     required String password,
   }) {
     return logInImplementation(email: email, password: password)
-        .then((result) => _controller.add(AuthenticationStatus.authenticated));
+        .then((result) => controller.add(AuthenticationStatus.authenticated));
   }
 
   Future<void> logOut() {
     return logOutImplementation()
-        .then((value) => _controller.add(AuthenticationStatus.unauthenticated));
+        .then((value) => controller.add(AuthenticationStatus.unauthenticated));
   }
 
-  void dispose() => _controller.close();
+  void dispose() => controller.close();
 }

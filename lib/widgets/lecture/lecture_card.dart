@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ordnerd/models/lecture.dart';
-import 'package:ordnerd/routes/lectures/lecture_view.dart';
 
 class LectureCard extends StatefulWidget {
   final Lecture lecture;
@@ -17,7 +16,7 @@ class _LectureCardState extends State<LectureCard> {
     return Card(
         child: InkWell(
       onTap: () {
-        Navigator.push(context, LectureViewPage.route(lecture: widget.lecture));
+        Navigator.pushNamed(context, '/list/view', arguments: widget.lecture);
       },
       child: ListTile(
         title: Text(
